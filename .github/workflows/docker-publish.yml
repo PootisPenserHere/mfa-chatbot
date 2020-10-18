@@ -86,3 +86,12 @@ jobs:
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
+
+      # TODO Only deploy when pushing the edge image
+      - name: deploy to caprover
+        id: deploy_to_caprover
+        uses:AlexxNB/caprover-action@v1
+        with:
+          server: ${{ secrets.CAPROVER_SERVER }}
+          password: ${{ secrets.CAPROVER_PASSWORD }}
+          appname: ${{ secrets.CAPROVER_APP }}
