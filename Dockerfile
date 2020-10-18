@@ -1,6 +1,8 @@
 FROM python:3.8-alpine
 LABEL maintainer = "Jose Pablo Aramburo <josepablo.aramburo@laziness.rocks>"
 
+ENV PYTHONUNBUFFERED 1
+
 WORKDIR /code
 COPY requirements.txt .
 

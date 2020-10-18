@@ -2,7 +2,7 @@ from flask import Flask
 from flask import jsonify
 from dotenv import load_dotenv
 
-import os
+from src.domain import environments
 
 load_dotenv(".env")
 
@@ -15,4 +15,4 @@ def health_check():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.getenv("APP_PORT")), debug=bool(os.getenv("DEV_MODE") == "true"))
+    app.run(host="0.0.0.0", port=environments.APP_PORT, debug=environments.DEV_MODE)

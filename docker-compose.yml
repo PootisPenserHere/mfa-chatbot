@@ -11,3 +11,5 @@ services:
     environment:
       - APP_PORT=${INTERNAL_PORT:-5000}
       - TZ=${TZ:-America/Mazatlan}
+      - DEV_MODE=${DEV_MODE}
+      - BASE_URL=${BASE_URL}
