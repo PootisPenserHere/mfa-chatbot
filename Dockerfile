@@ -9,6 +9,9 @@ COPY requirements.txt .
 RUN apk --no-cache add tzdata && \
     pip install --no-cache-dir -r requirements.txt
 
+RUN addgroup -S slothgroup && adduser -S container_sloth -G slothgroup
+USER container_sloth
+
 COPY . .
 
 HEALTHCHECK --interval=10s --timeout=2s --start-period=15s \
