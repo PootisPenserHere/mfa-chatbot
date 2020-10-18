@@ -12,6 +12,6 @@ RUN apk --no-cache add tzdata && \
 COPY . .
 
 HEALTHCHECK --interval=10s --timeout=2s --start-period=15s \
-    CMD wget --quiet --tries=1 --spider http://localhost:$APP_PORT/health-check || exit 1
+    CMD wget --quiet --tries=1 --spider http://localhost:$PORT/health-check || exit 1
 
-CMD gunicorn -b 0.0.0.0:$APP_PORT --reload app:app
+CMD gunicorn -b 0.0.0.0:$PORT --reload app:app
