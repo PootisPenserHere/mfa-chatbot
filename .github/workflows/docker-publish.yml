@@ -90,7 +90,7 @@ jobs:
       # TODO Only deploy when pushing the edge image
       - name: deploy to caprover
         id: deploy_to_caprover
-        uses:AlexxNB/caprover-action@v1
+        uses: AlexxNB/caprover-action@v1
         with:
           server: ${{ secrets.CAPROVER_SERVER }}
           password: ${{ secrets.CAPROVER_PASSWORD }}
