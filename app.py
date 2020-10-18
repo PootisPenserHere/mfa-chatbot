@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/health-check', methods=['GET'])
 def health_check():
-    return jsonify({"message": "Process running"})
+    return jsonify({"message": "Process running!"})
 
 
 if __name__ == "__main__":
