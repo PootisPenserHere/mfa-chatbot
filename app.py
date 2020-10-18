@@ -1,5 +1,10 @@
 from flask import Flask
 from flask import jsonify
+from dotenv import load_dotenv
+
+import os
+
+load_dotenv(".env")
 
 app = Flask(__name__)
 
@@ -10,4 +15,4 @@ def health_check():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=int(os.getenv("APP_PORT")), debug=bool(os.getenv("DEV_MODE") == "true"))
