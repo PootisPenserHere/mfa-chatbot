@@ -3,10 +3,16 @@ from flask import jsonify
 from dotenv import load_dotenv
 
 from src.domain import environments
+from src.applications import BoostrapApplication
 
 load_dotenv(".env")
 
 app = Flask(__name__)
+
+
+@app.before_first_request
+def setup_webhooks():
+    BoostrapApplication.BootstrapApplication()
 
 
 @app.route('/health-check', methods=['GET'])

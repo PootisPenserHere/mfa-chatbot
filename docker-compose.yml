@@ -13,3 +13,4 @@ services:
       - TZ=${TZ:-America/Mazatlan}
       - DEV_MODE=${DEV_MODE}
       - BASE_URL=${BASE_URL}
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
