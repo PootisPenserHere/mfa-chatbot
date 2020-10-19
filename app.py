@@ -21,7 +21,7 @@ def health_check():
 
 @app.route('/webhook/<path:path>', methods=['POST'])
 def chat_webhook(path):
-    print(request)
+    print(request.json)
     return jsonify({"message": "Process running!"})
 
 
