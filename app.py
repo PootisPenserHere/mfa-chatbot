@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import jsonify
+from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 
 from src.domain import environments
@@ -17,6 +16,12 @@ def setup_webhooks():
 
 @app.route('/health-check', methods=['GET'])
 def health_check():
+    return jsonify({"message": "Process running!"})
+
+
+@app.route('/webhook/<path:path>', methods=['POST'])
+def chat_webhook(path):
+    print(request)
     return jsonify({"message": "Process running!"})
 
 
