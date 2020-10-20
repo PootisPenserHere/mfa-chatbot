@@ -7,7 +7,9 @@ WORKDIR /code
 COPY requirements.txt .
 
 RUN apk --no-cache add tzdata && \
-    pip install --no-cache-dir -r requirements.txt
+    apk --no-cache --virtual .build-deps add gcc musl-dev libffi-dev openssl-dev && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apk del .build-deps
 
 RUN addgroup -S slothgroup && adduser -S container_sloth -G slothgroup
 USER container_sloth
