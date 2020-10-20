@@ -2,9 +2,11 @@ from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 
 from src.domain import environments
-from src.applications import BoostrapApplication
+from src.applications import BoostrapApplication, BotApplication
 
 load_dotenv(".env")
+
+bot_application = BotApplication.BotApplication()
 
 app = Flask(__name__)
 
@@ -21,7 +23,8 @@ def health_check():
 
 @app.route('/webhook/<path:path>', methods=['POST'])
 def chat_webhook(path):
-    print(request.json)
+    payload = request.get_json(force=True)
+    bot_application.respond_to_webhook(payload=payload)
     return jsonify({"message": "Process running!"})
 
 
