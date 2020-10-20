@@ -10,4 +10,4 @@ class BotApplication:
     def respond_to_webhook(self, payload):
         print(payload)
         update = telegram.update.Update.de_json(payload, self.bot)
-        self.bot.sendMessage(chat_id=update.message.chat_id, text='Hello, there')
+        self.bot.sendMessage(chat_id=update.message.chat_id, text=payload['message']['text'])
