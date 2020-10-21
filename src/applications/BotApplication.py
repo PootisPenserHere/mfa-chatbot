@@ -1,13 +1,9 @@
-import telegram
-
-from src.domain import environments
+from src.models import TelegramModel
 
 
 class BotApplication:
     def __init__(self):
-        self.bot = telegram.Bot(environments.TELEGRAM_TOKEN)
+        self.telegram_model = TelegramModel.TelegramModel()
 
     def respond_to_webhook(self, payload):
-        print(payload)
-        update = telegram.update.Update.de_json(payload, self.bot)
-        self.bot.sendMessage(chat_id=update.message.chat_id, text=payload['message']['text'])
+        self.telegram_model.respond_to_webhook(payload=payload)
