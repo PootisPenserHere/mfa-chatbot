@@ -87,11 +87,12 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
 
-      # TODO Only deploy when pushing the edge image
-      - name: deploy to caprover
-        id: deploy_to_caprover
-        uses: AlexxNB/caprover-action@v1
-        with:
-          server: ${{ secrets.CAPROVER_SERVER }}
-          password: ${{ secrets.CAPROVER_PASSWORD }}
-          appname: ${{ secrets.CAPROVER_APP }}
+      - name: Get the branch
+        id: get_branch
+        run: echo ::set-output name=BRANCH_NAME::${GITHUB_REF/refs\/heads\//}
+
+      # TODO only deploy on push and not on scheduled jobs
+      - name: Webhook
+        if: ${{ steps.get_branch.outputs.BRANCH_NAME == 'master' }}
+        run: curl --request POST --url 'https://captain.services.slothful.laziness.rocks/api/v2/user/apps/webhooks/triggerbuild?namespace=captain&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InRva2VuVmVyc2lvbiI6IjJjMWVhYTg0LTU4NmUtNDg2My1hNWYwLTAyODE3YTIwNjIzNCIsImFwcE5hbWUiOiJtZmEtY2hhdGJvdCIsIm5hbWVzcGFjZSI6ImNhcHRhaW4ifSwiaWF0IjoxNjA3Mzg3MDA3fQ.6dY91myZSc7F397OCXUXaKR5MNxyPGywhWDAQndObHg'
+
